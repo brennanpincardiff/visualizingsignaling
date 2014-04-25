@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+		<title> Render Multiple Proteins from Uniprot IDs </title>
+</head>
+
+
+<body>
+  <h1>Input Uniprot ID for multiple molecule(s) and access web</h1>
+
+  <script>
+    // So this works to input the UniProt IDs. They must be separated by a comma and a space. 
+    // Probably a way to correct for this if it's not true. Be careful here. 
+    // Then we can cycle through the array and make an array of URLs. 
+    // Then we can cycle through the array of URLs and get the UniProt IDs back from the XML file. 
+
+    // This is all good. 
+    // However I have a bit of a problem about how to render multiple objects in terms of variables. 
+    // I think it's probably another array that I need but I'm not sure of the best way to create it at the moment. 
+    // I need to think about the logic. 
+    // More to do. 
+
+    // dialogue box
+    var UniIDs=prompt("Please enter Uniprot ID separated by commas and a space"); 
+    var UniIDs=UniIDs.split(", "); // Split a string into an array of substrings
+    var addresses = []
+
+    // Cycle through the array to create the URLs
+
+    for (i=0;i<UniIDs.length;i++)
+    	{
+    		addresses.push("http://www.uniprot.org/uniprot/" + UniIDs[i] + ".xml");
+    	} 
+
+    // show us a couple of addresses to see if it works
+    alert(addresses[0])
+    alert(addresses[1])
+
+    for (i=0;i<addresses.length;i++)
+  	{
+  		xmlhttp=new XMLHttpRequest();
+  		xmlhttp.open("GET",addresses[i],false);
+  		xmlhttp.send();
+  		xmlDoc=xmlhttp.responseXML;
+
+  // This works to get the accession numbers and full Protein Name so I have uploaded the data - great. 
+  		x=xmlDoc.getElementsByTagName("accession")[0]
+  		y=x.childNodes[0];
+  		document.write(y.nodeValue);
+  		document.write(" ");
+  		x=xmlDoc.getElementsByTagName("fullName")[0]
+  		y=x.childNodes[0];
+  		document.write(y.nodeValue);
+  		document.write("<br>");
+	  }
+</script>
+</body>
