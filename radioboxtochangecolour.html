@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+
+<html>
+    <head>
+        <title> Using Radio Box to change rectangle colour </title>
+        <script src=http://d3js.org/d3.v3.min.js></script>
+    </head>
+
+    <body>
+        <h2> Change the colour of the square</h2>
+
+ <p>Works as of July 1st 2014 </p>
+
+<style>
+
+body {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  margin: auto;
+  position: relative;
+  width: 960px;
+}
+
+form {
+  position: absolute;
+  left: 0px;
+  top: 120px;
+}
+
+</style>
+<form>
+  <label><input type="radio" name="mode" value="red"> Red</label>
+  <label><input type="radio" name="mode" value="blue" checked> Blue</label>
+  <label><input type="radio" name="mode" value="yellow"> Yellow</label>
+</form>
+
+<body>
+	
+<script>
+
+	// It's good practice to generate an svg container that is as large as we need.
+ 		var svgContainer = d3.select("body").append("svg")
+                                   .attr("width", 400)
+                                   .attr("height", 400);
+ 
+ 	// This creates a rectangle.
+		var rectangle = svgContainer.append("rect")
+					      .attr("x", 100)
+                          .attr("y", 100)
+                          .attr("height", 100)
+                          .attr("width", 100)
+                          .style("fill", "blue");
+
+    
+    d3.selectAll("input").on("change", change);
+    
+    var timeout = setTimeout(function() {
+  d3.select("input[value=\"grouped\"]").property("checked", true).each(change);
+}, 2000);
+
+
+function change() {
+  clearTimeout(timeout);
+  if (this.value === "red") transitionRed();
+  if (this.value === "blue") transitionBlue();
+  if (this.value === "yellow") transitionYellow();
+}
+
+
+function transitionRed() {
+
+var rectangle = svgContainer.append("rect")
+					      .attr("x", 100)
+                          .attr("y", 100)
+                          .attr("height", 100)
+                          .attr("width", 100)
+                          .style("fill", "red");
+}
+
+function transitionBlue() {
+
+var rectangle = svgContainer.append("rect")
+					      .attr("x", 100)
+                          .attr("y", 100)
+                          .attr("height", 100)
+                          .attr("width", 100)
+                          .style("fill", "blue");
+}
+
+function transitionYellow() {
+var rectangle = svgContainer.append("rect")
+					      .attr("x", 100)
+                          .attr("y", 100)
+                          .attr("height", 100)
+                          .attr("width", 100)
+                          .style("fill", "yellow");
+}
+
+
+	</script>
+	
+	</body>
+	</html>
