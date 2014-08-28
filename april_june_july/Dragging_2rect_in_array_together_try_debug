@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title> dragging </title>
+		<script src=http://d3js.org/d3.v3.min.js></script>
+	</head>
+	
+	<body>
+		<h2> Dragging two rectangles coded by an array</h2>
+		
+    
+		
+	<script>
+	
+	// Trying to get them to move together - groups
+			
+	blocks = [{ x: 0, y: 0, startx: 10, starty: 10, height:100, width:20, fill: "red"}, 
+	          { x: 0, y: 0, startx: 10, starty: 110, height:100, width:20, fill: "blue"}
+	         ];
+
+	// drag = d3.behavior.drag()
+  	//	.origin(Object)
+  	//	.on("drag", function(d) {
+    //		d.x = d3.event.x;
+    //		d.y = d3.event.y;
+    //		draw();
+  	//	});
+
+	svg = d3.select("body")
+  		.append("svg:svg")
+  		.attr("width", 1000)
+  		.attr("height", 600);
+
+	function draw() {
+	   rectgroup = svg.append("g");
+//	               .call(drag);
+	   
+	   rectangles = rectgroup.selectAll("rect")
+    			.data(blocks)
+    			.enter
+  
+  	   rectanglesattributes = rectangles
+  	            .attr("x", function (d) { return d.startx; })
+                .attr("y", function (d) { return d.starty; })
+                .attr("height", function (d) { return d.height; })
+                .attr("width", function (d) { return d.width; })
+                .style("fill",  function (d) { return d.fill; });             
+
+	}
+
+	draw()
+	
+	
+	
+	
+	
+</script>
+	
+</body>
+</html>

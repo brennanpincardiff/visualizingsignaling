@@ -1,0 +1,17 @@
+Molecule    Uniprot ID  Protein Name    Start   End Molecule    Length  Uniprot website
+CD40    P25942  TNR5_HUMAN  21  277 CD40    257 http://www.uniprot.org/uniprot/P25942
+TRAF2   Q12933  TRAF2_HUMAN 2   501 TRAF2   500 http://www.uniprot.org/uniprot/Q12933
+IKK alpha   O15111  IKKA_HUMAN  1   745 IKK alpha   745 
+IKK beta    O14920  IKKB_HUMAN  1   756 IKK beta    756 
+NEMO    Q9Y6K9  NEMO_HUMAN  1   419 NEMO    419 
+IkB alpha   P25963  IKBA_HUMAN  1   317 IkB alpha   317 http://www.uniprot.org/uniprot/P25963
+Rel A   Q04206   TF65_HUMAN 1   551 Rel A   551 http://www.uniprot.org/uniprot/Q04206
+p50 P19838  NFKB1_HUMAN 1   433 p50 433 http://www.uniprot.org/uniprot/P19838
+
+
+P25942, Q12933, O15111, O14920, Q9Y6K9, P25963, Q04206, P19838
+
+
+change order: 
+O14920, Q12933, P25942
+

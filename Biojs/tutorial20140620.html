@@ -1,0 +1,37 @@
+<!doctype html>
+<html>
+    <head>
+        <!--Dependencies-->
+        <!--JQuery-->
+        <script type="text/javascript" src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
+        <script type="text/javascript">
+            jQuery.noConflict();
+        </script>
+        <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.2/jquery-ui.min.js"></script>
+        <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.2/themes/base/jquery.ui.all.css" />
+        <!--Biojs-->
+        <script type="text/javascript" src="http://www.ebi.ac.uk/Tools/biojs/registry/src/Biojs.js"></script>
+        <script type="text/javascript" src="http://www.ebi.ac.uk/Tools/biojs/registry/src/Biojs.Sequence.js"></script>
+        <script src="http://www.ebi.ac.uk/Tools/biojs/registry/scripts/Biojs.Tooltip.js"></script>
+        <link href="http://www.ebi.ac.uk/Tools/biojs/registry/style/biojs.Tooltip.css" rel="stylesheet" type="text/css" />
+    </head>
+    
+    <script>
+             window.onload = function() {
+                var theSequence = "METLCQRLNVCQDKILTHYENDSTDLRDHIDYWKHMRLECAIYYKAREMGFKHINHQVVPTLAVSKNKALQAIELQLTLETIYNSQYSNEKWTLQDVSLEVYLTAPTGCIKKHGYTVEVQFDGDICNTMHYTNWTHIYICEEASVTVVEGQVDYYGLYYVHEGIRTYFVQFKDDAEKYSKNKVWEVHAGGQVILCPTSVFSSNEVSSPEIIRQHLANHPAATHTKAVALGTEETQTTIQRPRSEPDTGNPCHTTKLLHRDSVDSAPILTAFNSSHKGRINCNSNTTPIVHLKGDANTLKCLRYRFKKHCTLYTAVSSTWHWTGHNVKHKSAIVTLTYDSEWQRDQFLSQVKIPKTITVSTGFMSI";
+                var mySequence = new Biojs.Sequence({
+                    sequence : theSequence,
+                    target : "sequenceDiv",
+                    format : 'CODATA',
+                    id : 'P918283'
+                });
+              };
+     </script>
+    
+    <body>
+        <h1> BioJs tutorial </h1>
+        <div id="sequenceDiv" />
+        
+        
+    </body>
+</html>

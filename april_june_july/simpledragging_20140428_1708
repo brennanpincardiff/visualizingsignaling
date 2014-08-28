@@ -6,7 +6,7 @@
 	</head>
 	
 	<body>
-		<h2> Dragging a group of two rectangle</h2>
+		<h2> Dragging one circle</h2>
 		
 	<script>
 		
@@ -34,19 +34,13 @@
 
   		box.attr("transform", function(d) { return "translate("+d.x+","+d.y+")"; });
 
-  		gEnter.append("rect")
- 			.attr("x", 10)
-	 		.attr("y", 10)
-	 		.attr("height", 100)
-	 		.attr("width", 20)
+  		gEnter.append("circle")
+ 			.attr("r", 25)
+	 		.attr("cx", 50)
+	 		.attr("cy", 50)
 	 		.style("fill",  "red");
     
-  		gEnter.append("rect")
-    			.attr("x", 10)
-    			.attr("y", 110)
-    			.attr("height", 30)
-    			.attr("width", 20)
-    			.style("fill",  "blue");
+  		
     
 
 	}

@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title> Input multiple Uniprot, clean, render and drag </title>
+        <script src=http://d3js.org/d3.v3.min.js></script>
+    </head>
+
+    <body>
+        <h2> Combining rendering for multiple Uniprot IDs, render and dragging</h2>
+
+ <p>working on Thursday May 1st, 2014 </p>
+
+ <p>Draft script. </p> 
+
+    <script>
+
+        var blocks = [{ x: 0, y: 0, }];
+
+    // Steps complted by this script
+    // Input a UniProt IDs (will also work for more than one ID). 
+    // Make the URL. 
+    // Go to the URL and retrieve the XML file 
+    // Extract the features 
+    // Remove "unwanted features"
+    // Render the molecule
+    // Then allow it to be dragged.  
+
+    // dialogue box
+    var UniIDs=prompt("Please enter a Uniprot ID"); 
+    var UniIDs=UniIDs.split(", "); // Split a string into an array of substrings
+    var addresses = [];
+
+    // Cycle through the array to create the URLs
+
+    for (i=0;i<UniIDs.length;i++)
+        {
+            addresses.push("http://www.uniprot.org/uniprot/" + UniIDs[i] + ".xml");
+        } 
+
+    // show us a couple of addresses to see if it works
+    alert(addresses[0]);
+
+    for (i=0;i<addresses.length;i++)
+    {
+        xmlhttp=new XMLHttpRequest();
+        xmlhttp.open("GET",addresses[i],false);
+        xmlhttp.send();
+        xmlDoc=xmlhttp.responseXML;
+
+  // This works to get the accession numbers and full Protein Name so I have uploaded the data - great. 
+        x=xmlDoc.getElementsByTagName("accession")[0];
+        y=x.childNodes[0];
+        document.write(y.nodeValue);
+        document.write(" ");
+        x=xmlDoc.getElementsByTagName("fullName")[0];
+        y=x.childNodes[0];
+        document.write(y.nodeValue);
+        document.write("<br>");
+      }
+
+
+// this works and makes five arrays. 
+// it also does output a list of features, a list of starts and a list of ends. 
+// I can remove some of the output later
+
+
+// This works to get the accession number so I have uploaded the data - great. 
+
+ 
+// getting a list of features
+for (k=0; k<UniIDs; k++
+    {
+// create variable names for the arrays
+         var type = [];
+         var desc = [];
+         var stat = [];
+
+// put type, description and status in arrays
+         x=xmlDoc.getElementsByTagName("feature");
+         for (i=0;i<x.length;i++)
+               {
+                  type.push(x[i].getAttribute('type'));
+               desc.push(x[i].getAttribute('description'));
+               stat.push(x[i].getAttribute('status'));
+                } 
+
+// put start number in an array
+        var start = [];
+
+        x=xmlDoc.getElementsByTagName("begin");
+        for (i=0;i<x.length;i++)
+           {
+             start.push(x[i].getAttribute('position'));
+           } 
+
+// put end number in an array
+        var end = [];
+
+        x=xmlDoc.getElementsByTagName("end");
+        for (i=0;i<x.length;i++)
+            {
+            end.push(x[i].getAttribute('position'));
+            } 
+
+// so I have my data in 5 arrays
+// with my five arrays, combine them to create an array of arrays. 
+// my arrays are type, desc, stat, start, end
+        var protein = [];
+        var colour = ["blue", "green", "red", "black", "brown", "orange", "blue", "green", "red", "black", "brown", "orange",];
+
+        for (i = 0; i < type.length; ++i)
+                {
+                    protein[i] =Array(UniIDs[k], type[i], desc[i], stat[i], start[i], end[i], colour[i]);
+                 }
+
+// done - it works. I have an array of arrays that I can use to render the molecule
+
+// The next step has been created to remove  unwanted Features (variable notwantedFeatures)
+
+    var toBeSpliced = [];
+    var notwantedFeatures = ["signal peptide",  "glycosylation site", "disulfide bond", 
+                             "splice variant", "sequence variant", "sequence conflict", 
+                             "strand", "helix", "initiator methionine", "turn",
+                             "mutagenesis site", "cross-link", "modified residue"
+                             ];
+
+// Loop through the list of Feature Types and find the "unwanted" features - needs two loops - one through array type and one through array notwantedFeatures.
+
+    for (i = 0; i < type.length; i++)      
+             {
+             for(j = 0; j<notwantedFeatures.length; j++)
+                {
+                if (type[i] ===  notwantedFeatures[j])
+                      {                  
+                         toBeSpliced.push([i]);
+                      }
+               }       
+             }
+
+// Reverse the list so as to delete from the end. This avoids lots of confusion caused by deleting from the begining.
+
+    toBeSpliced.reverse();
+
+// Loop through and splice out from the end of the array 
+    for (i = 0; i < toBeSpliced.length; i++)
+            {
+                x = toBeSpliced[i];
+                protein.splice(x, 1);
+                type.splice(x,1)
+            }
+
+// Write the results to check. 
+     document.write("<br>");     
+     document.write("<br>");
+     document.write("Sliced Protein");
+     document.write("<br>");
+     document.write(protein);
+
+
+
+
+// This defines the drag function
+    drag = d3.behavior.drag()
+        .origin(Object)
+        .on("drag", function(d) {
+            d.x = d3.event.x;
+            d.y = d3.event.y;
+            draw();
+        });
+
+// This creates the svg canvas
+    svg = d3.select("body")
+        .append("svg:svg")
+        .attr("width", 1000)
+        .attr("height", 600);
+
+// This creates the representation of Protein
+
+    function draw() {
+
+// Makes a box, as a svg group, and binds some data to it. 
+         box = svg.selectAll("g")
+                .data(blocks);
+
+// Calls the drag function with the box  
+        gEnter = box.enter().append("g")
+            .call(drag);
+
+// Not quite sure about this bit but I think it probably allows a recording of the movement
+// of the box
+        box.attr("transform", function(d) { return "translate("+d.x+","+d.y+")"; });
+
+// Writes the Accession Number at top of the box
+         gEnter.append("text")
+            .attr("x", 10)
+            .attr("y", 15)
+            .text(protein[0][1])
+            .attr("font-family", "sans-serif")
+            .attr("font-size", "18px")
+            .attr("fill", "Black");    
+ 
+// Creates each of the domains and binds them into the box 
+for (i = 0; i < type.length; ++i)
+            {
+         gEnter.append("rect")
+            .attr("x", 20)
+            .attr("y", protein[i][3])
+            .attr("height", function (d) { return (protein[i][4] - protein[i][3]); })
+            .attr("width", 20)
+            .style("fill",  protein[i][5]);
+
+// Creates the text for the domains and binds them into the box         
+          gEnter.append("text")
+                 .attr("x", 45)
+                 .attr("y", function (d) { return ( Number(protein[i][3]) + (Number(protein[i][4]-Number(protein[i][3]))/2) )})
+                 .text( function (d) { return protein[i][0] + " " + protein[i][1]; })
+                 .attr("font-family", "sans-serif")
+                 .attr("font-size", "10px")
+                 .attr("fill", "red");    
+ 
+            }
+    }  
+
+// draws the molecules, I think.
+
+    draw();
+    }
+
+
+
+
+</script>
+
+</body>
+</html>

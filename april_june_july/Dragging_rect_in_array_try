@@ -6,11 +6,13 @@
 	</head>
 	
 	<body>
-		<h2> Dragging a group of two rectangle</h2>
+		<h2> Dragging a rectangle coded by an array</h2>
 		
 	<script>
-		
-	blocks = [{ x: 0, y: 0 }];
+			
+	blocks = [{ x: 0, y: 0, startx: 10, starty: 10, height:100, width:20, fill: "red"}, 
+	          { x: 0, y: 0, startx: 100, starty: 10, height:100, width:20, fill: "blue"}
+	         ];
 
 	drag = d3.behavior.drag()
   		.origin(Object)
@@ -35,18 +37,13 @@
   		box.attr("transform", function(d) { return "translate("+d.x+","+d.y+")"; });
 
   		gEnter.append("rect")
- 			.attr("x", 10)
-	 		.attr("y", 10)
-	 		.attr("height", 100)
-	 		.attr("width", 20)
-	 		.style("fill",  "red");
-    
-  		gEnter.append("rect")
-    			.attr("x", 10)
-    			.attr("y", 110)
-    			.attr("height", 30)
-    			.attr("width", 20)
-    			.style("fill",  "blue");
+ 			.attr("x", function (d) { return d.startx; })
+	 		.attr("y", function (d) { return d.starty; })
+	 		.attr("height", function (d) { return d.height; })
+	 		.attr("width", function (d) { return d.width; })
+	 		.style("fill",  function (d) { return d.fill; });  			
+    			
+       
     
 
 	}

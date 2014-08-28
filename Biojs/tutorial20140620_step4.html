@@ -1,0 +1,84 @@
+<!doctype html>
+<html>
+    <head>
+        <!--Dependencies-->
+        <!--JQuery-->
+        <script type="text/javascript" src="http://code.jquery.com/jquery-1.8.2.min.js"></script>
+        <script type="text/javascript">
+            jQuery.noConflict();
+        </script>
+        <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.2/jquery-ui.min.js"></script>
+        <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.2/themes/base/jquery.ui.all.css" />
+        <!--Biojs-->
+        <script type="text/javascript" src="http://www.ebi.ac.uk/Tools/biojs/registry/src/Biojs.js"></script>
+        <script type="text/javascript" src="http://www.ebi.ac.uk/Tools/biojs/registry/src/Biojs.Sequence.js"></script>
+        <script src="http://www.ebi.ac.uk/Tools/biojs/registry/scripts/Biojs.Tooltip.js"></script>
+        <link href="http://www.ebi.ac.uk/Tools/biojs/registry/style/biojs.Tooltip.css" rel="stylesheet" type="text/css" />
+    </head>
+    
+    <script>
+             window.onload = function() {
+                   
+                var UniID=prompt("Please enter a Uniprot ID"); 
+                var address = ["http://www.uniprot.org/uniprot/" + UniID + ".xml"];
+
+                alert(address);
+
+                xmlhttp=new XMLHttpRequest();
+                xmlhttp.open("GET",address,false);
+                xmlhttp.send();
+                xmlDoc=xmlhttp.responseXML;
+
+     // This works to get the accession numbers and full Protein Name so I have uploaded the data - great. 
+                x=xmlDoc.getElementsByTagName("sequence")[0];
+                y=x.childNodes[0];
+                document.write(y.nodeValue);
+   //             document.write(" ");
+    //            x=xmlDoc.getElementsByTagName("fullName")[0];
+    //            y=x.childNodes[0];
+     //           document.write(y.nodeValue);
+     //           document.write("<br>");
+     // }
+                
+ 
+    //          xmlhttp=new XMLHttpRequest();
+     //         xmlhttp.open("GET",addresses[j],false);
+     //         xmlhttp.send();
+      //        xmlDoc=xmlhttp.responseXML;
+
+  // This works to get the accession numbers and full Protein Name so I have uploaded the data - great. 
+    //          x=xmlDoc.getElementsByTagName("accession")[0];
+     //         y=x.childNodes[0];
+     //         document.write(y.nodeValue);
+     //         document.write(" ");
+     //         x=xmlDoc.getElementsByTagName("fullName")[0];
+     //         y=x.childNodes[0];
+     //         document.write(y.nodeValue);
+      //        document.write("<br>");     
+                
+                
+                
+                
+
+            
+    //            window.onload = function() {
+    //            var theSequence = ;
+    //            var mySequence = new Biojs.Sequence({
+     //               sequence : theSequence,
+     //               target : "sequenceDiv",
+      //              format : 'CODATA',
+      //              id : 'P918283'
+     //           });
+      //        };
+            
+            
+            
+     </script>
+    
+    <body>
+        <h1> BioJs tutorial </h1>
+   //     <div id="sequenceDiv" />
+        
+        
+    </body>
+</html>
