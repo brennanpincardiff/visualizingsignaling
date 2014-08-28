@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title> Dragging CD40 </title>
+		<script src=http://d3js.org/d3.v3.min.js></script>
+	</head>
+
+	<body>
+		<h2> Dragging CD40</h2>
+		
+ <p>Completed Monday April 28, 2014 </p>
+
+ <p>This script really seems to work. </p> 
+
+	<script>
+
+		var	blocks = [{ x: 0, y: 0, }];
+
+// Properties of CD40 in four arrays
+		var colour = ["blue", "green", "red"]
+		var starts = [21, 194, 216]
+		var ends = [193, 215, 277]
+		var names = ["Extracellular", "Transmembrane", "Cytoplasmic Potential"]
+
+// This defines the drag function
+	drag = d3.behavior.drag()
+  		.origin(Object)
+  		.on("drag", function(d) {
+    		d.x = d3.event.x;
+    		d.y = d3.event.y;
+    		draw();
+  		});
+
+// This creates the svg canvas
+	svg = d3.select("body")
+  		.append("svg:svg")
+  		.attr("width", 1000)
+  		.attr("height", 600);
+
+// This creates the representation of CD40
+
+	function draw() {
+	
+// Makes a box, as a svg group, and binds some data to it. 
+		 box = svg.selectAll("g")
+    			.data(blocks);
+
+// Calls the drag function with the box  
+  		gEnter = box.enter().append("g")
+		 	.call(drag);
+
+// Not quite sure about this bit but I think it probably allows a recording of the movement
+// of the box
+  		box.attr("transform", function(d) { return "translate("+d.x+","+d.y+")"; });
+
+// Writes the name of the molecule (CD40) into the box
+		 gEnter.append("text")
+		 	.attr("x", 10)
+		 	.attr("y", 15)
+		 	.text("CD40")
+		 	.attr("font-family", "sans-serif")
+        	.attr("font-size", "18px")
+        	.attr("fill", "Black");    
+ 
+// Creates each of the domains and binds them into the box 
+for (i = 0; i < colour.length; ++i)
+            {
+		 gEnter.append("rect")
+ 			.attr("x", 20)
+	 		.attr("y", starts[i])
+	 		.attr("height", function (d) { return (ends[i] - starts[i]); })
+	 		.attr("width", 20)
+	 		.style("fill",  colour[i]);
+	 		
+// Creates the text for the domains and binds them into the box	 		
+	 	  gEnter.append("text")
+	 	         .attr("x", 45)
+                 .attr("y", function (d) { return (starts[i]+(ends[i]-starts[i])/2); })
+                 .text( function (d) { return names[i] ; })
+                 .attr("font-family", "sans-serif")
+                 .attr("font-size", "10px")
+                 .attr("fill", "red");    
+ 
+            }
+	}  
+
+// draws the box?
+
+	draw()
+
+
+
+
+
+</script>
+
+</body>
+</html>
