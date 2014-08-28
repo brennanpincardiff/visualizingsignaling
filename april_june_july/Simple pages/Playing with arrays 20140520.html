@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title> Playing with arrays </title>
+        <script src=http://d3js.org/d3.v3.min.js></script>
+    </head>
+
+    <body>
+        <h2> Playing with arrays</h2>
+
+ <p>Tuesday May 20th, 2014 </p>
+
+ <p>Trying to understand arrays </p> 
+
+    <script>
+
+  var array1 = [1,2,3,4,5];
+  var largest = Math.max(array1);
+  alert(Math.max(10,100));
+  
+  function getMaxOfArray(array1) {
+    return Math.max.apply(null, array1);
+    }
+  
+  alert(getMaxOfArray
+      )
+  var alphaarray = ["a","b","c","d","e"];
+  var arrayarray = [];
+  var pusharray = [];
+  var anotherpusharray = [];  
+    
+    
+    for (i = 0; i < array1.length; ++i)
+            {   
+                arrayarray[i] =Array(array1[i], alphaarray[i]);
+                pusharray.push(array1[i],alphaarray[i]);
+                
+            }
+    
+    anotherpusharray.push(array1, alphaarray)
+  
+     document.write("<br>");     
+     document.write("<br>");
+     document.write(arrayarray);
+     document.write("<br>");     
+     document.write("<br>");
+     document.write(arrayarray[0]);
+    document.write("<br>");     
+     document.write("<br>");
+     document.write(largest);  
+     
+     
+     
+     // output put is 1,a
+     
+     
+ 
+     document.write("<br>");     
+     document.write("<br>");
+     document.write(pusharray);
+     
+     document.write("<br>");     
+     document.write("<br>");
+     document.write(pusharray[0]);
+     
+  
+  // output looks the same for both arrayarray and pusharray even though the information is differently organised.  
+  // the different organisation is demonstrated by what happens when you write the first element from each array. The first element from 
+  // arrayarray is [1,a]
+  
+   
+  
+      document.write("<br>");     
+     document.write("<br>");
+     document.write(anotherpusharray);
+     document.write("<br>");     
+     document.write("<br>");
+     document.write(anotherpusharray[0]);
+     document.write("<br>");     
+     document.write("<br>");
+     document.write(anotherpusharray[0][0]);
+      
+ // 
+  
+    
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title> dragging </title>
+		<script src=http://d3js.org/d3.v3.min.js></script>
+	</head>
+	
+	<body>
+		<h2> Dragging one rectangle</h2>
+		
+	<script>
+		
+	blocks = [{ x: 0, y: 0 }];
+
+	drag = d3.behavior.drag()
+  		.origin(Object)
+  		.on("drag", function(d) {
+    		d.x = d3.event.x;
+    		d.y = d3.event.y;
+    		draw();
+  		});
+
+	svg = d3.select("body")
+  		.append("svg:svg")
+  		.attr("width", 1000)
+  		.attr("height", 600);
+
+	function draw() {
+		 box = svg.selectAll("g")
+    			.data(blocks);
+  
+  		gEnter = box.enter().append("g")
+		 	.call(drag);
+
+  		box.attr("transform", function(d) { return "translate("+d.x+","+d.y+")"; });
+
+  		gEnter.append("rect")
+ 			.attr("x", 10)
+	 		.attr("y", 10)
+	 		.attr("height", 100)
+	 		.attr("width", 20)
+	 		.style("fill",  "red"); 
+
+	}
+
+	draw()
+	
+	
+	
+	
+	
+</script>
+	
+</body>
+</html>
