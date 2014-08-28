@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="Paul Brennan">
+    <link rel="icon" href="../../favicon.ico">
+
+    <title>D3 Protein Viewer</title>
+
+    
+    <!-- load up the scripts -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="js/d3.min.js"></script>
+    <script src="js/d3.tip.v0.6.3.js"></script>
+    
+        <style>
+            #moleculearea {
+    /*margin is the space around the map*/
+      margin:10px 10%;
+    /*border is black line around the map*/
+      border:2px solid #000;
+    /*border-radius is the curves at the corners of the area*/  
+      border-radius: 5px;
+      height:100%;
+      overflow:hidden;
+    /*background defines the curves of the div on which the area is drawn*/    
+      background: #F0F8FF;
+    }
+
+    </style>
+
+    
+</head>
+
+<body>
+
+
+    <!-- Main jumbotron  -->
+    <div class="jumbotron">
+        <div class="container">
+        <h2>Molecule Rendering Area</h2>
+        <p>           
+        <div id="moleculearea">
+               <!-- javascript for drawing a map -->
+            <script src=js/drawnDragCD40.js>
+                </script>
+          
+
+                
+        </div>
+
+    </div>
+     
+         
+    </div>
+        
+ 
