@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+		<title> CD40 Domains </title>
+		<script src=http://d3js.org/d3.v3.min.js></script>
+	</head>
+
+
+<body>
+<h1>Getting array from XML file and removing unwanted features</h1>
+
+
+<script>
+
+// this works and makes five arrays. 
+// it also does output a list of features, a list of starts and a list of ends. 
+// I can remove some of the output later
+
+    xmlhttp=new XMLHttpRequest();
+
+    xmlhttp.open("GET","http://www.uniprot.org/uniprot/P25942.xml",false);
+    xmlhttp.send();
+    xmlDoc=xmlhttp.responseXML;
+
+// This works to get the accession number so I have uploaded the data - great. 
+
+    x=xmlDoc.getElementsByTagName("accession")[0]
+    y=x.childNodes[0];
+    document.writeln(y.nodeValue);
+
+// getting a list of features
+
+// create variable names for the arrays
+    var type = [];
+    var desc = [];
+    var stat = [];
+
+// put type, description and status in arrays
+    x=xmlDoc.getElementsByTagName("feature");
+    for (i=0;i<x.length;i++)
+	   {
+		    type.push(x[i].getAttribute('type'));
+		    desc.push(x[i].getAttribute('description'));
+		    stat.push(x[i].getAttribute('status'));
+		  
+	   } 
+
+// put start number in an array
+    var start = []
+
+    x=xmlDoc.getElementsByTagName("begin")
+    for (i=0;i<x.length;i++)
+    	{
+		  start.push(x[i].getAttribute('position'));
+    	} 
+
+// put end number in an array
+    var end = []
+
+    x=xmlDoc.getElementsByTagName("end")
+    for (i=0;i<x.length;i++)
+    	{
+    		end.push(x[i].getAttribute('position'));
+    	} 
+
+// so I have my data in 5 arrays
+// with my five arrays, combine them to create an array of arrays. 
+// my arrays are type, desc, stat, start, end
+    var CD40 = [];
+    var colour = ["blue", "green", "red", "black", "brown", "orange", "blue", "green", "red", "black", "brown", "orange",]
+
+    for (i = 0; i < type.length; ++i)
+            {
+                CD40[i] =Array(type[i], desc[i], stat[i], start[i], end[i], colour[i]);
+            };
+     
+     document.write("<br>");
+     document.write("<br>"); 
+     document.write("<br>");
+     
+//  I have selected the rows I want and put them into a fresh array. 
+//  This can now be drawn. 
+
+    var slicedCD40 = [];
+    var wantedFeatures = ["chain", "topological domain", "transmembrane region", "repeat"]
+    
+    for (i = 0; i < type.length; i++)
+                
+             {
+                if (type[i] ==  wantedFeatures[0])
+                      {
+                      slicedCD40.push(CD40[i]);
+                      }
+                else if (type[i] ==  wantedFeatures[1])
+                      {
+                      slicedCD40.push(CD40[i]);
+                      } 
+                else if (type[i] ==  wantedFeatures[2])
+                      {
+                      slicedCD40.push(CD40[i]);
+                       } 
+                else if (type[i] ==  wantedFeatures[3])
+                       {
+                       slicedCD40.push(CD40[i]);
+                       }       
+             }
+             
+    document.write("<br>");
+    document.write(slicedCD40);
+    
+    
+
+        
+
+
+
+
+
+</script>
+
+</body>
+</html>

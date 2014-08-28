@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title> dragging </title>
+		<script src=http://d3js.org/d3.v3.min.js></script>
+	</head>
+	
+	<body>
+		<h2> Dragging a group of two rectangle</h2>
+		
+	<script>
+	
+	var CD40 = [
+		{"Name":"Topological domain", "start":21, "end": 193, "Info":"Extracellular Potential", "color":"blue"},
+		{"Name":"Transmembrane", "start":194, "end": 215, "Info":"Helical; Potential", "color":"green"},
+		{"Name":"Topological domain", "start":216, "end": 277, "Info":"Cytoplasmic Potential", "color":"red"},
+		{"Name":"Repeat", "start":25, "end": 60, "Info":"TNFR-Cys 1", "color":"black"},
+		{"Name":"Repeat", "start":61, "end": 103, "Info":"TNFR-Cys 2", "color":"black"},
+		{"Name":"Repeat", "start":104, "end": 144, "Info":"TNFR-Cys 3", "color":"black"},
+		{"Name":"Repeat", "start":145, "end": 187, "Info":"TNFR-Cys 4", "color":"black"}];
+	
+	
+		
+	blocks = [{ x: 0, y: 0 }];
+
+	drag = d3.behavior.drag()
+  		.origin(Object)
+  		.on("drag", function(d) {
+    		d.x = d3.event.x;
+    		d.y = d3.event.y;
+    		draw();
+  		});
+
+	svg = d3.select("body")
+  		.append("svg:svg")
+  		.attr("width", 1000)
+  		.attr("height", 600);
+
+	function draw() {
+		 box = svg.selectAll("g")
+    			.data(blocks);
+  
+  		gEnter = box.enter().append("g")
+		 	.call(drag);
+
+  		box.attr("transform", function(d) { return "translate("+d.x+","+d.y+")"; });
+
+  		gEnter.append("rect")
+ 			.attr("x", 10)
+	 		.attr("y", 10)
+	 		.attr("height", 100)
+	 		.attr("width", 20)
+	 		.style("fill",  "red");
+    
+  		gEnter.append("rect")
+    			.attr("x", 10)
+    			.attr("y", 110)
+    			.attr("height", 10)
+    			.attr("width", 20)
+    			.style("fill",  "blue");
+    
+
+	}
+
+	draw()
+	
+	
+	
+	
+	
+</script>
+	
+</body>
+</html>

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title> Cleaning CD40 features array </title>
+        <script src=http://d3js.org/d3.v3.min.js></script>
+    </head>
+
+    <body>
+        <h2> Cleaning CD40 Array by removing</h2>
+
+ <p>Playing Wednesday April 30, 2014 </p>
+ <p>This seems to work - happy days </p>
+
+ <p> </p> 
+
+    <script>
+
+// this works and makes five arrays. 
+// it also does output a list of features, a list of starts and a list of ends. 
+// I can remove some of the output later
+
+    xmlhttp=new XMLHttpRequest();
+
+    xmlhttp.open("GET","http://www.uniprot.org/uniprot/P25942.xml",false);
+    xmlhttp.send();
+    xmlDoc=xmlhttp.responseXML;
+
+// This works to get the accession number so I have uploaded the data - great. 
+
+    x=xmlDoc.getElementsByTagName("accession")[0]
+    y=x.childNodes[0];
+    document.write(y.nodeValue);
+    document.write("<br>"); 
+
+// getting a list of features
+
+// create variable names for the arrays
+    var type = [];
+    var desc = [];
+    var stat = [];
+
+// put type, description and status in arrays
+    x=xmlDoc.getElementsByTagName("feature");
+    for (i=0;i<x.length;i++)
+       {
+          type.push(x[i].getAttribute('type'));
+          desc.push(x[i].getAttribute('description'));
+          stat.push(x[i].getAttribute('status'));
+       } 
+
+// put start number in an array
+    var start = [];
+
+    x=xmlDoc.getElementsByTagName("begin")
+    for (i=0;i<x.length;i++)
+        {
+          start.push(x[i].getAttribute('position'));
+        } 
+        
+
+// put end number in an array
+    var end = [];
+
+    x=xmlDoc.getElementsByTagName("end")
+    for (i=0;i<x.length;i++)
+        {
+            end.push(x[i].getAttribute('position'));
+        } 
+    
+
+// so I have my data in 5 arrays
+// with my five arrays, combine them to create an array of arrays. 
+// my arrays are type, desc, stat, start, end
+    var CD40 = [];
+    var slicedCD40 = [];
+    var colour = ["blue", "green", "red", "black", "brown", "orange", "blue", "green", "red", "black", "brown", "orange",]
+
+    for (i = 0; i < type.length; ++i)
+            {
+                CD40[i] = Array(type[i], desc[i], stat[i], start[i], end[i], colour[i]);
+                slicedCD40[i] = Array(type[i], desc[i], stat[i], start[i], end[i], colour[i]);
+            }
+            
+
+                
+// done - it works. I have an array of arrays that I can use to render the molecule
+
+
+// The next step has been created to focus on the wanted Features (variable wantedFeatures)
+    var toBeSpliced = [];
+    var notwantedFeatures = ["signal peptide", "glycosylation site", "disulfide bond", "splice variant", "sequence variant", "sequence conflict", "strand", "helix"]
+
+// Loop through the list of Feature Types and find the "unwanted" features - needs two loops.
+
+    for (i = 0; i < type.length; i++)      
+             {
+             for(j = 0; j<notwantedFeatures.length; j++)
+                {
+                if (type[i] ===  notwantedFeatures[j])
+                      {                  
+                         toBeSpliced.push([i]);
+                      }
+               }       
+             }
+
+// Reverse the list so as to delete from the end. This avoids lots of confusion caused by deleting from the begining.
+
+    toBeSpliced.reverse();
+
+// Loop through and splice out from the end of the array 
+    for (i = 0; i < toBeSpliced.length; i++)
+            {
+                x = toBeSpliced[i];
+                slicedCD40.splice(x, 1);
+            }
+
+// Write the results to check. 
+     document.write("<br>");     
+     document.write("<br>");
+     document.write("Sliced CD40");
+     document.write("<br>");
+     document.write(slicedCD40);
+
+ 
+  
+</script>
+
+</body>
+</html>
