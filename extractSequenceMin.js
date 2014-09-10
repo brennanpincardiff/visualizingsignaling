@@ -11,29 +11,27 @@ paul.exSeq=function(strategy)
         var UniID = strategy.UniID;
         var proteinSeq = [];
         var address = [];
+     
+     // make the address of the EBI DAS server   
         address.push("http://www.ebi.ac.uk/das-srv/uniprot/das/uniprot/sequence?segment=" + UniID);
-
+        
+     // get the XML file
   		xmlhttp=new XMLHttpRequest();
   		xmlhttp.open("GET",address,false);
   		xmlhttp.send();
-  		xmlDoc=xmlhttp.responseXML;
+  		xmlDoc=xmlhttp.responseXML;		
   		
+    // parse the XML file to get the required information
   		x=xmlDoc.getElementsByTagName("SEQUENCE");   
-//        document.write("Accession Number:", x[0].getAttribute('id'));
         proteinSeq.push(x[0].getAttribute('id'));
-        alert(proteinSeq);
-//        document.write("<br>");
         proteinSeq.push(x[0].getAttribute('label'));
-//        document.write(" ");
-  		
-  		
-  		
   		x=xmlDoc.getElementsByTagName("SEQUENCE")[0]
   		y=x.childNodes[0];
   		proteinSeq.push(y.nodeValue);
   		
+  	// Just write it in a crude format. 	
   		document.write(proteinSeq);
-          
+        return proteinSeq;
     };	  
 
 
