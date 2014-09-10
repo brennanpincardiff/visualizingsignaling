@@ -1,14 +1,18 @@
 var paul=paul || {};
 
+
+//var protSeqExt {};
+
 // so I have a script. 
 // it will extract the protein sequence from the UniProt DAS database. 
 // it will make an array. 
 // the array contains id, label and the sequence. 
 // Good!
 
-paul.exSeq=function(strategy)
+paul.getSeq=function(strategy)
     {
         var UniID = strategy.UniID;
+        
         var proteinSeq = [];
         var address = [];
      
@@ -34,5 +38,6 @@ paul.exSeq=function(strategy)
         return proteinSeq;
     };	  
 
+// protSeqExt.getSeq(); // put in to try and make BioJS compatable. 
 
-
+// module.exports = protSeqExt; // Export the object for other components
