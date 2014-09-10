@@ -7,18 +7,17 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="Paul Brennan">
-    <link rel="icon" href="../../favicon.ico">
 
-    <title>D3 Protein Viewer</title>
+    <title>Protein Sequence Viewer</title>
 
     
     <!-- load up the scripts -->
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-    <script src="js/d3.min.js"></script>
-    <script src="js/d3.tip.v0.6.3.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>    
+    
+    <script src="./extractSequenceMin.js" ></script>
     
     <style>
-        #moleculearea {
+        #sequencearea {
             /*margin is the space around the map*/
               margin:10px 10%;
             /*border is black line around the map*/
@@ -42,14 +41,21 @@
     <!-- Main jumbotron  -->
     <div class="jumbotron">
         <div class="container">
-        <h2>Molecule Rendering Area</h2>
+        <h2>Sequence</h2>
         <p>           
-        <div id="moleculearea">
-               <!-- javascript for drawing a map -->
-            <script src=js/drawnDragCD40.js>
-                </script>
-          
-
+        <div id="sequencearea">
+  
+            
+  
+  
+            <script type="application/javascript">
+            paul.getSeq(
+            {
+                UniID:"Q12933",
+             });     
+             </script>
+            
+              
                 
         </div>
 
