@@ -14,25 +14,10 @@
     <!-- load up the scripts -->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>    
     
-    <script src="./js/drawMoleculeJSONformat.js" ></script>
+    <script src="./extractFeaturesAsArrayEBIpage.js" ></script>
     <script src=http://d3js.org/d3.v3.min.js></script>
 
     
-    <style>
-        #moleculearea0 {
-            /*margin is the space around the map*/
-              margin:10px 10%;
-            /*border is black line around the map*/
-              border:2px solid #000;
-            /*border-radius is the curves at the corners of the area*/  
-              border-radius: 5px;
-              height:100%;
-              overflow:hidden;
-            /*background defines the curves of the div on which the area is drawn*/    
-              background: #F0F8FF;
-        }
-
-    </style>
 
     
 </head>
@@ -45,25 +30,16 @@
         <div class="container">
         <h2>Sequence</h2>
         <p>           
-         <div id="moleculearea2">
+        <div id="moleculearea">
   
             
   
   
             <script type="application/javascript">
-            
-                var name = "CD40";
-               var molecule = [
-        {"start":21, "end": 193, "color":"blue"}
-        ];
-
-            
-            
-            paul.drawMoleculeJSONformat(
+             var UniID = "P25942";
+            paul.extractFeaturesEBIpage(
             {
-                molecule: molecule,
-                name: name,
-                place: "#moleculearea2"
+                UniID: UniID,
                 
              });     
              </script>

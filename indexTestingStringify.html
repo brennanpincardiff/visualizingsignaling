@@ -52,16 +52,28 @@
   
             <script type="application/javascript">
             
-                var name = "CD40";
-               var molecule = [
+           var start = 21;
+           var end = 193;
+           var color = "blue";
+           
+           var a =[];
+           a.push({ 'start': start, 'end': end, 'color': color });
+           
+           var molecule = JSON.stringify(a);
+                     
+                
+               var molecule2 = [
         {"start":21, "end": 193, "color":"blue"}
         ];
 
+
+           console.log(molecule);  // this is in JSON
+           console.log(molecule2); // this is reported as an object
+           console.log(a);         // this is reported as three objects!
             
-            
-            paul.drawMoleculeJSONformat(
+           paul.drawMoleculeJSONformat(
             {
-                molecule: molecule,
+                molecule: a,
                 name: name,
                 place: "#moleculearea2"
                 
