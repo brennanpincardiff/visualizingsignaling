@@ -92,9 +92,23 @@ paul.extractFeaturesEBIpage=function(strategy)
     var colour = ["blue", "green", "red", "black", "brown", "orange", "blue", "green", "red", "black", "brown", "orange",];
 
     for (i = 0; i < type.length; ++i)
-            {
-                protein[i] =Array(type[i], desc[i], stat[i], start[i], end[i], colour[i]);
+            {           
+              protein.push({'Name':type[i], 'status': stat[i], 'start':start[i],'end': end[i], 'Info': desc[i], 'color':colour[i]});
+                            
             }
+ 
+ //   var CD40 = [
+ //       {"Name":"Topological domain", "start":21, "end": 193, "Info":"Extracellular Potential", "color":"blue"},
+ //       {"Name":"Transmembrane", "start":194, "end": 215, "Info":"Helical; Potential", "color":"green"},
+ //       {"Name":"Topological domain", "start":216, "end": 277, "Info":"Cytoplasmic Potential", "color":"red"},
+ //       {"Name":"Repeat", "start":25, "end": 60, "Info":"TNFR-Cys 1", "color":"black"},
+ //       {"Name":"Repeat", "start":61, "end": 103, "Info":"TNFR-Cys 2", "color":"black"},
+ //       {"Name":"Repeat", "start":104, "end": 144, "Info":"TNFR-Cys 3", "color":"black"},
+ //       {"Name":"Repeat", "start":145, "end": 187, "Info":"TNFR-Cys 4", "color":"black"}];
+
+ 
+ 
+ 
             
 // done - it works. I have an array of arrays that I can use to render the molecule
 
@@ -106,7 +120,7 @@ paul.extractFeaturesEBIpage=function(strategy)
      document.write(protein);
      document.write("<br>");
 
-}
+};
 
 
 
